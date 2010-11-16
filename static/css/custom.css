@@ -1,0 +1,124 @@
+@import url(http://fonts.googleapis.com/css?family=Lobster&subset=latin);
+
+#header {
+	background: #12326E;
+	padding: 20px;
+}
+
+h1 {
+	font-size: 40px;
+	font-family: 'Lobster', arial, serif;
+	margin-left: 80px;
+}
+
+h1 > a, h1 > a:hover {
+	outline: none;
+	color: #FFF;
+	text-decoration: none;
+}
+
+body {
+	font-family: Helvetica, Arial, sans-serif;
+	/*background-color: #D8D8D8;*/
+	background: #B1C6FD;
+}
+
+#content {
+	background: #FFF;
+	margin: 25px auto 30px auto;
+	padding: 10px;
+	width: 70%;
+	font-size: 14px;
+	-moz-border-radius:1ex;
+	-webkit-border-radius:1ex;
+}
+
+a {
+	color: #0033CC;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+img {
+	border-style: none;
+}
+
+td {
+	vertical-align: top;
+}
+
+table {
+	margin: auto;
+}
+
+hr {
+	color: #B1C6FD;
+	background: #B1C6FD;
+	height: 1px;
+	border: 0px;
+}
+
+.entry {
+	margin-left: 5px;
+}
+
+.status_info {
+	font-size: 10px;
+	color: #999;
+	margin-top: 5px;
+}
+
+#footer {
+	font-size: 12px;
+	background: #12326E;
+	padding-bottom: 5px;
+	color: #999;
+	text-align: center;
+}
+
+#footer-nav {
+	list-style-type: none;
+	margin: 0px;
+	padding: 5px 0px 5px 0px;
+}
+
+#footer-nav li {
+	display: inline;
+	padding: 0px 10px 0px 10px;
+}
+
+#footer a {
+	color: #D8D8D8;
+}
+
+a.button {
+	width: 100%;
+	display: block;
+	margin-top: 5px;
+	padding: 10px 0px 10px 0px;
+	border: solid 1px;
+	border-color: #B1C6FD;
+	color: #12326E;
+	-moz-border-radius:1ex;
+	-webkit-border-radius:1ex;
+	outline: none;
+}
+
+a.button:hover {
+	background: #B1C6FD;
+	border-color: #12326E;
+	text-decoration: none;
+}
+
+.load {
+	margin: 10px;
+}
+
+#ajax {
+	text-align: center;
+	margin: 5px;
+	display: none;
+}
