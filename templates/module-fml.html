@@ -1,0 +1,26 @@
+<tr>
+	<td class="profile-pic">
+		<a href="http://www.facebook.com/profile.php?id={{ escape(post["from"]["id"]) }}" target="_blank">
+			<img src="http://graph.facebook.com/{{ post["from"]["id"] }}/picture?type=square" />
+		</a>
+	</td>
+	<td>
+		<div class="entry">
+			{% if homepage %}
+			<a href="http://localhost:8888/fml/{{ post["id"] }}" class="message">{{ escape(post["message"]) }}</a>
+			{% else %}
+			{{ escape(post["message"]) }}
+			{% end %}
+			<div class="status_info"> 
+				<a href="http://www.facebook.com/profile.php?id={{ escape(post["from"]["id"]) }}" target="_blank">
+					{{ escape(post["from"]["name"]) }}
+				</a> <span class="timestamp">{{ post["created_time"] }}</span>
+			</div>	
+		</div>
+	</td>
+</tr>
+<tr>
+	<td colspan=2>
+		<hr/>
+	</td>
+</tr>

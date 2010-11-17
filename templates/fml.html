@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+
+{% block title %}FMLFeed - Test{% end %}
+
+{% block content %}
+<table id="table">
+{{ modules.Fml(post, False) }}
+</table>
+{% end %}
