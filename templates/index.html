@@ -5,44 +5,36 @@
 		<link rel="stylesheet" type="text/css" href={{ static_url("css/custom.css") }} />
 		<script type="text/javascript" src={{ static_url("js/jquery.js") }}></script>
 		<script type="text/javascript" src={{ static_url("js/fml.js") }}></script>
-		<title>FMLFeed - Alpha</title>
+		<!--[if !IE 7]>
+			<style type="text/css">
+				#container {display:table;height:100%}
+			</style>
+		<![endif]-->
+		<title>{% block title %}FMLFeed - Alpha{% end %}</title>
 	</head>
 	<body>
-		<div id="header">
-			<h1><a href="">FMLFeed</a></h1>
-		</div>
-		<div id="content">
-		<table id="table">
-			{% for post in posts %}
-				{% if "message" in post and len(post["message"]) > 10 %}
-			<tr>
-				<td>
-					<a href="http://www.facebook.com/profile.php?id={{ escape(post["from"]["id"]) }}" target="_blank">
-						<img src="http://graph.facebook.com/{{ post["from"]["id"] }}/picture?type=square" />
-					</a>
-				</td>
-				<td>
-					<div class="entry">
-						{{ escape(post["message"]) }}
-						<div class="status_info"> 
-							<a href="http://www.facebook.com/profile.php?id={{ escape(post["from"]["id"]) }}" target="_blank">{{ escape(post["from"]["name"]) }}</a> <span class="timestamp">{{ post["created_time"] }}</span>
-						</div>	
+		<div id="container">
+			<div id="content">
+				<div id="header">
+					<h1><a href="http://localhost:8888">FMLFeed</a></h1>
+				</div>
+				<div id="feed">
+					{% block content %}
+					<table id="table">
+						{% for post in posts %}
+							{% if "message" in post and len(post["message"]) > 10 %}
+								{{ modules.Fml(post) }}
+							{% end %}
+						{% end %}
+					</table>
+					<input type="hidden" value={{ url }} id="next" name="next" autocomplete="off" />
+					<div id="ajax">
+						<img class="ajax" src={{ static_url("images/ajax-loader.gif") }} />
 					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan=2>
-					<hr/>
-				</td>
-			</tr>
-				{% end %}
-			{% end %}
-		</table>
-		<input type="hidden" value={{ url }} id="next" name="next" autocomplete="off" />
-		<div id="ajax">
-			<img class="ajax" src={{ static_url("images/ajax-loader.gif") }} />
-		</div>
-		<a class="button" href="" onclick="return false;"><span class="load">&#9660; Load older posts</span></a>
+					<a class="button" href="" onclick="return false;"><span class="load">&#9660; Load older posts</span></a>
+					{% end %}
+				</div>
+			</div>
 		</div>
 		<div id="footer">
 			<ul id="footer-nav">
