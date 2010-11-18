@@ -6,6 +6,7 @@ import tornado.web
 import tornado.options
 import os.path
 import uimodules
+import utils
 
 class HomeHandler(tornado.web.RequestHandler):
 	@tornado.web.asynchronous
@@ -23,7 +24,7 @@ class FmlHandler(tornado.web.RequestHandler):
 	@tornado.web.asynchronous
 	def get(self, fml_id):
 		http = tornado.httpclient.AsyncHTTPClient()
-		http.fetch("https://graph.facebook.com/" + fml_id,
+		http.fetch("https://graph.facebook.com/" + utils.urlToId(fml_id),
 			callback=self.on_response)
 		
 	def on_response(self, response):
@@ -39,7 +40,7 @@ settings = {
 
 application = tornado.web.Application([
 	(r"/", HomeHandler),
-	(r"/fml/([_0-9]+)", FmlHandler),
+	(r"/([a-y0-9]+z[a-y0-9]+)", FmlHandler),
 ], **settings)
 
 if __name__ == "__main__":
