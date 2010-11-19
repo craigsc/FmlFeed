@@ -1,0 +1,18 @@
+<tr>
+	<td class="profile-pic">
+		<a href="http://www.facebook.com/profile.php?id={{ escape(post["from"]["id"]) }}" target="_blank">
+			<img src="http://graph.facebook.com/{{ post["from"]["id"] }}/picture?type=large" />
+		</a>
+	</td>
+	<td>
+		<div class="entry">
+			{{ escape(post["message"]) }}
+			<div class="status_info"> 
+				<a href="http://www.facebook.com/profile.php?id={{ escape(post["from"]["id"]) }}" target="_blank">
+					{{ escape(post["from"]["name"]) }}
+				</a> <span class="timestamp">{{ post["created_time"] }}</span> <fb:like href="http://fmlfeed.com/{{ idTo36(post["id"]) }}" layout="button_count" font="arial"></fb:like>
+			</div>
+			<hr/>	
+		</div>
+	</td>
+</tr>
