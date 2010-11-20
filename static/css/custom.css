@@ -38,6 +38,10 @@ body {
 	width: 50px;
 }
 
+.entry, .profile-pic {
+	padding: 7px 0px 7px 0px;
+}
+
 .message, .message:hover {
 	color: #000;
 	text-decoration: none;
@@ -69,6 +73,8 @@ hr {
 	background: #B1C6FD;
 	height: 1px;
 	border: 0px;
+	margin: 0;
+	padding: 0;
 }
 
 .entry {
@@ -89,8 +95,8 @@ hr {
 a.button {
 	width: 100%;
 	display: block;
-	margin-top: 5px;
-	padding: 10px 0px 10px 0px;
+	margin-top: 15px;
+	padding: 15px 0px 15px 0px;
 	border: solid 1px;
 	border-color: #B1C6FD;
 	color: #12326E;
@@ -111,7 +117,7 @@ a.button:hover {
 
 #ajax {
 	text-align: center;
-	margin: 5px;
+	margin-top: 15px;
 	display: none;
 }
 
