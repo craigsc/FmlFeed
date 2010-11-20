@@ -12,7 +12,7 @@ class HomeHandler(tornado.web.RequestHandler):
 	@tornado.web.asynchronous
 	def get(self):
 		http = tornado.httpclient.AsyncHTTPClient()
-		http.fetch("https://graph.facebook.com/search?q=fml&type=post",
+		http.fetch("https://graph.facebook.com/search?q=fml&type=post&limit=50",
 			callback=self.on_response)
 	
 	def on_response(self, response):
@@ -30,7 +30,7 @@ class FmlHandler(tornado.web.RequestHandler):
 	def on_response(self, response):
 		if (response.error): raise tornado.web.HTTPError(500)
 		json = tornado.escape.json_decode(response.body)
-		self.render("fml.html", post=json)
+		self.render("fml.html", post=json, idTo36=utils.idTo36)
 
 settings = {
 	"static_path": os.path.join(os.path.dirname(__file__), "static"),

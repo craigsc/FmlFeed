@@ -1,20 +1,12 @@
-<tr>
+<tr class="status">
 	<td class="profile-pic">
 		<a href="http://www.facebook.com/profile.php?id={{ escape(post["from"]["id"]) }}" target="_blank">
-			{% if homepage %}
 			<img src="http://graph.facebook.com/{{ post["from"]["id"] }}/picture?type=square" />
-			{% else %}
-			<img src="http://graph.facebook.com/{{ post["from"]["id"] }}/picture?type=large" />
-			{% end %}
 		</a>
 	</td>
 	<td>
 		<div class="entry">
-			{% if homepage %}
 			<a href="http://localhost:8888/{{ idTo36(post["id"]) }}" class="message">{{ escape(post["message"]) }}</a>
-			{% else %}
-			{{ escape(post["message"]) }}
-			{% end %}
 			<div class="status_info"> 
 				<a href="http://www.facebook.com/profile.php?id={{ escape(post["from"]["id"]) }}" target="_blank">
 					{{ escape(post["from"]["name"]) }}
@@ -24,7 +16,7 @@
 	</td>
 </tr>
 <tr>
-	<td colspan=2>
+	<td colspan=2 class="hr">
 		<hr/>
 	</td>
 </tr>

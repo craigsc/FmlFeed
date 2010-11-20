@@ -1,5 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<html xmlns:og="http://opengraphprotocol.org/schema/"
+	  xmlns:fb="http://www.facebook.com/2008/fbml">
 	<head>
 		<link rel="stylesheet" type="text/css" href={{ static_url("css/reset.css") }} />
 		<link rel="stylesheet" type="text/css" href={{ static_url("css/custom.css") }} />
@@ -11,8 +12,33 @@
 			</style>
 		<![endif]-->
 		<title>{% block title %}FMLFeed - Alpha{% end %}</title>
+		<meta property="fb:app_id" content="142409489144762"/>
+		<meta property="og:site_name" content="Fmlfeed"/>
+		<meta property="og:description" content="See realtime fmls from over 500 million users! You will be surprised by how many people are having a bad day. Entertaining and addictive."/>
+		{% block meta %}
+		<meta property="og:title" content="Fmlfeed"/>
+		<meta property="og:type" content="website"/>
+		<meta property="og:url" content="http://www.fmlfeed.com"/>
+		{% end %}
 	</head>
 	<body>
+		<div id="fb-root"></div>
+		<script>
+			window.fbAsyncInit = function() {
+				FB.init({
+					appId: '142409489144762',
+					status: true,
+					cookie: true,
+					xfbml: true
+				});
+			};
+			(function() {
+				var e = document.createElement('script');
+				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+				e.async = true;
+				document.getElementById('fb-root').appendChild(e);
+			}());
+		</script>
 		<div id="container">
 			<div id="content">
 				<div id="header">

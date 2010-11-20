@@ -1,6 +1,12 @@
 {% extends "index.html" %}
 
-{% block title %}FMLFeed - Test{% end %}
+{% block meta %}
+<meta property="og:title" content="{{ escape(post["from"]["name"]) }}'s status"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="http://www.fmlfeed.com/{{ idTo36(post["id"]) }}"/>
+{% end %}
+
+{% block title %}FMLFeed - {{ escape(post["from"]["name"])'s FML }}{% end %}
 
 {% block content %}
 <table id="table">

@@ -75,6 +75,10 @@ hr {
 	margin-left: 10px;
 }
 
+.status:hover {
+	background: #EDEDED;
+}
+
 .status_info {
 	font-size: 10px;
 	color: #999;
