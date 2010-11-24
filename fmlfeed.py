@@ -31,15 +31,22 @@ class FmlHandler(tornado.web.RequestHandler):
 		if (response.error): raise tornado.web.HTTPError(500)
 		json = tornado.escape.json_decode(response.body)
 		self.render("fml.html", post=json, idTo36=utils.idTo36)
-
+		
+class AboutHandler(tornado.web.RequestHandler):
+	def get(self):
+		self.render("about.html")
+		
 settings = {
 	"static_path": os.path.join(os.path.dirname(__file__), "static"),
 	"template_path": os.path.join(os.path.dirname(__file__), "templates"),
 	"ui_modules": uimodules,
+	"debug": True,
 }
 
 application = tornado.web.Application([
 	(r"/", HomeHandler),
+	(r"/newest", HomeHandler),
+	(r"/about", AboutHandler),
 	(r"/([a-y0-9]+z[a-y0-9]+)", FmlHandler),
 ], **settings)
 

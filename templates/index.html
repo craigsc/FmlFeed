@@ -41,8 +41,19 @@
 		</script>
 		<div id="container">
 			<div id="content">
+				<span id="top"></span>
 				<div id="header">
-					<h1><a href="http://localhost:8888">FMLFeed</a></h1>
+					<div class="col-width">
+						<h1><a href="http://localhost:8888">FMLFeed</a></h1>
+						<div id="navigation">
+							<ul>
+								{% block nav %}
+								<li><a href="http://localhost:8888"><span id="selected" class="nav">newest</span></a></li>
+								<li><a href="http://localhost:8888/about"><span class="nav">about</span></a></li>
+								{% end %}
+							</ul>
+						</div>
+					</div>
 				</div>
 				<div id="feed">
 					{% block content %}
@@ -63,11 +74,19 @@
 			</div>
 		</div>
 		<div id="footer">
-			<ul id="footer-nav">
-				<li><a href="http://www.craigsc.com">About</a></li>
-				<li><a href="mailto:craig@craigsc.com">Contact</a></li>
-			</ul>
-			© 2010 Craig Campbell. All Rights Reserved.
+			<div class="col-width">
+				<div id="copyright">
+					© 2010 FMLfeed
+				</div>
+				<div id="footer-nav">
+					<ul>
+						<li><a href="http://localhost:8888/about">About</a></li>
+						<li><a href="http://www.fmlfeed.tumblr.com">Blog</a></li>
+						<li><a href="http://localhost:8888/team">Team</a></li>
+						<li><a href="mailto:craig@craigsc.com">Feedback</a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

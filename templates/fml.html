@@ -8,6 +8,11 @@
 
 {% block title %}FMLFeed - {{ escape(post["from"]["name"]) }}'s FML{% end %}
 
+{% block nav %}
+<li><a href="http://localhost:8888"><span class="nav">newest</span></a></li>
+<li><a href="http://localhost:8888/about"><span class="nav">about</span></a></li>
+{% end %}
+
 {% block content %}
 <table id="table">
 {{ modules.Fml(post, False) }}
