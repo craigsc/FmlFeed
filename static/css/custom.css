@@ -21,13 +21,13 @@
 	float: left;
 }
 
-h1 {
+#header h1 {
 	font-size: 40px;
 	font-family: 'Lobster', arial, serif;
 	display: inline;
 }
 
-h1 > a, h1 > a:hover {
+#header h1 > a, #header h1 > a:hover {
 	outline: none;
 	color: #FFF;
 	text-decoration: none;

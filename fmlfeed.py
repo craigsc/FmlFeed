@@ -35,6 +35,10 @@ class FmlHandler(tornado.web.RequestHandler):
 class AboutHandler(tornado.web.RequestHandler):
 	def get(self):
 		self.render("about.html")
+
+class TeamHandler(tornado.web.RequestHandler):
+	def get(self):
+		self.render("team.html")
 		
 settings = {
 	"static_path": os.path.join(os.path.dirname(__file__), "static"),
@@ -47,6 +51,7 @@ application = tornado.web.Application([
 	(r"/", HomeHandler),
 	(r"/newest", HomeHandler),
 	(r"/about", AboutHandler),
+	(r"/team", TeamHandler),
 	(r"/([a-y0-9]+z[a-y0-9]+)", FmlHandler),
 ], **settings)
 
