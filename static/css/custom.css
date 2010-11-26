@@ -83,8 +83,13 @@ body {
 	-webkit-border-radius:1ex;
 }
 
+table {
+	table-layout: fixed;
+	width: 100%;
+}
+
 .profile-pic {
-	width: 50px;
+	width: 50px
 }
 
 .entry, .profile-pic {
@@ -94,6 +99,7 @@ body {
 .message, .message:hover {
 	color: #000;
 	text-decoration: none;
+	word-wrap: break-word;
 }
 
 a {
@@ -111,10 +117,6 @@ img {
 
 td {
 	vertical-align: top;
-}
-
-table {
-	width: 100%;
 }
 
 hr {
@@ -231,12 +233,4 @@ body:before {
 	float: left;
 	width: 0;
 	margin-top: -32767px;
-}
-
-pre {
-white-space: pre-wrap; /* css-3 */
-white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-white-space: -pre-wrap; /* Opera 4-6 */
-white-space: -o-pre-wrap; /* Opera 7 */
-word-wrap: break-word; /* Internet Explorer 5.5+ */
 }

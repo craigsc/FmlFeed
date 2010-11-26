@@ -12,7 +12,7 @@ class HomeHandler(tornado.web.RequestHandler):
 	@tornado.web.asynchronous
 	def get(self):
 		http = tornado.httpclient.AsyncHTTPClient()
-		http.fetch("https://graph.facebook.com/search?q=fml&type=post&limit=50",
+		http.fetch("https://graph.facebook.com/search?q=http&type=post&limit=50",
 			callback=self.on_response)
 	
 	def on_response(self, response):
