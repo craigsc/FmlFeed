@@ -12,13 +12,13 @@ class HomeHandler(tornado.web.RequestHandler):
 	@tornado.web.asynchronous
 	def get(self):
 		http = tornado.httpclient.AsyncHTTPClient()
-		http.fetch("https://graph.facebook.com/search?q=http&type=post&limit=50",
+		http.fetch("https://graph.facebook.com/search?q=fml&type=post&limit=50",
 			callback=self.on_response)
 	
 	def on_response(self, response):
 		if (response.error): raise tornado.web.HTTPError(500)
 		json = tornado.escape.json_decode(response.body)
-		self.render("index.html", posts=json["data"], url=json["paging"]["next"])
+		self.render("index.html", posts=json["data"], url=json["paging"]["next"], valid=utils.valid)
 
 class FmlHandler(tornado.web.RequestHandler):
 	@tornado.web.asynchronous

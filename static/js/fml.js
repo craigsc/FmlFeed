@@ -7,7 +7,7 @@ $(document).ready(function() {
 		$('a.button').slideUp('slow');
 		$.getJSON($('#next').val() + '&callback=?', function(data) {
 			$.each(data.data, function(i, item){
-				if (item.message && item.message.length > 10) { $('#table').append(getFML(item)); }
+				if (valid(item)) { $('#table').append(getFML(item)); }
 			});
 			$('#next').val(data.paging.next);
 			$('#ajax').slideUp('slow');
@@ -15,6 +15,13 @@ $(document).ready(function() {
 		});
 	});
 });
+
+function valid(post) {
+	if (!post.message || post.from.category) { return false; }
+	var message = post.message.toLowerCase().replace(/(fml|!|\.| )+/g, '');
+	if (message.length < 15) { return false; }
+	return true;
+}
 
 function getFML(data) {
 	return "<tr class='status'><td class='profile-pic'><a href='http://www.facebook.com/profile.php?id=" + data.from.id + "' target='_blank'><img src='http://graph.facebook.com/" 

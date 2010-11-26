@@ -59,7 +59,7 @@
 					{% block content %}
 					<table id="table">
 						{% for post in posts %}
-							{% if "message" in post and len(post["message"]) > 10 %}
+							{% if valid(post) %}
 								{{ modules.Fml(post) }}
 							{% end %}
 						{% end %}

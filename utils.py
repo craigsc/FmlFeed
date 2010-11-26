@@ -20,3 +20,11 @@ def urlToId(encoded):
 	converted.insert(0, str(int(parts[1], 35)))
 	return "".join(converted) or '0'
 	
+def valid(post):
+	if not "message" in post or "category" in post["from"]:
+		return False
+	message = post["message"].lower().replace('fml', '').replace('.', '').replace('!', '').replace(' ', '')
+	if len(message) < 15:
+		return False
+	return True
+	
