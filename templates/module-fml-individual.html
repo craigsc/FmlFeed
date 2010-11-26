@@ -1,12 +1,11 @@
 <tr>
-	<td class="profile-pic">
+	<td class="profile-pic-large" align="center">
 		<a href="http://www.facebook.com/profile.php?id={{ escape(post["from"]["id"]) }}" target="_blank">
 			<img id="pic" src="http://graph.facebook.com/{{ post["from"]["id"] }}/picture?type=large" />
 		</a>
 	</td>
 	<td>
 		<div class="entry">
-			
 			<span class="message">{{ escape(post["message"]) }}</span>
 			<div class="status_info"> 
 				<a href="http://www.facebook.com/profile.php?id={{ escape(post["from"]["id"]) }}" target="_blank">
@@ -17,9 +16,10 @@
 		</div>
 	</td>
 </tr>
-<script>
+<script type="text/javascript">
 	$("#pic").one("load",function(){
-		$('.profile-pic').width($('#pic').width());
+		if ($('#pic').width() != 0)
+			$('.profile-pic-large').width($('#pic').width());
 	}).each(function(){
 		if(this.complete || (jQuery.browser.msie && parseInt(jQuery.browser.version) == 6)) 
 			$(this).trigger("load");

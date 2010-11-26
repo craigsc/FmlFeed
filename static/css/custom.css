@@ -92,6 +92,11 @@ table {
 	width: 50px
 }
 
+.profile-pic-large {
+	width: 200px;
+	padding: 7px 0px;
+}
+
 .entry, .profile-pic {
 	padding: 7px 0px 7px 0px;
 }

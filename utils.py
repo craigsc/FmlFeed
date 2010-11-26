@@ -28,3 +28,10 @@ def valid(post):
 		return False
 	return True
 	
+def like(post):
+	if not "likes" in post:
+		return "Like"
+	if post["likes"] == 1:
+		return "1 person likes this"
+	return `post["likes"]` + " people like this"
+	

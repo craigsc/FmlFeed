@@ -10,7 +10,7 @@
 			<div class="status_info"> 
 				<a href="http://www.facebook.com/profile.php?id={{ escape(post["from"]["id"]) }}" target="_blank">
 					{{ escape(post["from"]["name"]) }}
-				</a> <span class="timestamp">{{ post["created_time"] }}</span>
+				</a> <span class="timestamp">{{ post["created_time"] }}</span> <a href="{{ idTo36(post["id"]) }}">{{ like(post) }}</a>
 			</div>	
 		</div>
 	</td>

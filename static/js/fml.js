@@ -16,18 +16,19 @@ $(document).ready(function() {
 	});
 });
 
+function getFML(data) {
+	return "<tr class='status'><td class='profile-pic'><a href='http://www.facebook.com/profile.php?id=" + data.from.id + "' target='_blank'><img src='http://graph.facebook.com/" 
+	+ data.from.id + "/picture?type=square' /></a></td><td><div class='entry'>" + "<a href='" + to35(data.id) + "' class='message'>" 
+	+ wrap(data.message) + "</a>" + "<div class='status_info'><a href='http://www.facebook.com/profile.php?id=" + data.from.id + "' target='_blank'>" 
+	+ wrap(data.from.name) + "</a> <span class='timestamp'>" + formatTime(data.created_time) + "</span> " + "<a href='" + to35(data.id) + "'>" + like(data) + "</a>"
+	+ "</div></div></td></tr><tr><td colspan=2><hr/></td></tr>";
+}
+
 function valid(post) {
 	if (!post.message || post.from.category) { return false; }
 	var message = post.message.toLowerCase().replace(/(fml|!|\.| )+/g, '');
 	if (message.length < 15) { return false; }
 	return true;
-}
-
-function getFML(data) {
-	return "<tr class='status'><td class='profile-pic'><a href='http://www.facebook.com/profile.php?id=" + data.from.id + "' target='_blank'><img src='http://graph.facebook.com/" 
-	+ data.from.id + "/picture?type=square' /></a></td><td><div class='entry'>" + "<a href='http://localhost:8888/" + to35(data.id) + "' class='message'>" 
-	+ wrap(data.message) + "</a>" + "<div class='status_info'><a href='http://www.facebook.com/profile.php?id=" + data.from.id + "' target='_blank'>" 
-	+ wrap(data.from.name) + "</a> <span class='timestamp'>" + formatTime(data.created_time) + "</span></div></div></td></tr><tr><td colspan=2><hr/></td></tr>";
 }
 
 //hack to escape text clientside
@@ -48,6 +49,12 @@ function to35(post_id) {
 		converted = 'z' + converted;
 	}
 	return converted.substr(1, converted.length);
+}
+
+function like(post) {
+	if (!post.likes) { return "Like"; }
+	if (post.likes == 1) { return "1 person likes this"; }
+	return post.likes + " people like this";
 }
 
 function formatTime(time) {
