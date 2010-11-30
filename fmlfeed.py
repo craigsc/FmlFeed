@@ -3,6 +3,7 @@ import tornado.httpserver
 import tornado.httpclient
 import tornado.ioloop
 import tornado.web
+from tornado.options import define, options
 import tornado.options
 import os.path
 import uimodules
@@ -55,8 +56,10 @@ application = tornado.web.Application([
 	(r"/([a-y0-9]+z[a-y0-9]+)", FmlHandler),
 ], **settings)
 
+define("port", default=8888, type=int, help="port to listen on")
+
 if __name__ == "__main__":
 	tornado.options.parse_command_line()
 	http_server = tornado.httpserver.HTTPServer(application)
-	http_server.listen(8888)
+	http_server.listen(options.port)
 	tornado.ioloop.IOLoop.instance().start()
