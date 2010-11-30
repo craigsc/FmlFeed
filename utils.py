@@ -1,4 +1,4 @@
-def idTo36(post_id):
+def idToUrl(post_id):
 	parts = post_id.split("_")
 	if len(parts) != 2: raise ValueError, "post id is not formatted properly"
 	letters = "0123456789abcdefghijklmnopqrstuvwxy"

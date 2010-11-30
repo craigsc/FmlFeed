@@ -8,58 +8,85 @@ import tornado.options
 import os.path
 import uimodules
 import utils
+import memcache
 
-class HomeHandler(tornado.web.RequestHandler):
+class BaseHandler(tornado.web.RequestHandler):
+	@property
+	def mc(self):
+		return self.application.mc
+	@property
+	def timeout(self):
+		return self.application.timeout
+
+class HomeHandler(BaseHandler):
 	@tornado.web.asynchronous
 	def get(self):
-		http = tornado.httpclient.AsyncHTTPClient()
-		http.fetch("https://graph.facebook.com/search?q=fml&type=post&limit=50",
-			callback=self.on_response)
-	
+		json = self.mc.get("newest")
+		if not json:
+			http = tornado.httpclient.AsyncHTTPClient()
+			http.fetch("https://graph.facebook.com/search?q=fml&type=post&limit=50",
+				callback=self.on_response)
+		else:
+			self.render("index.html", posts=json["data"], 
+				url=json["paging"]["next"], valid=utils.valid)
+
 	def on_response(self, response):
 		if (response.error): raise tornado.web.HTTPError(500)
 		json = tornado.escape.json_decode(response.body)
-		self.render("index.html", posts=json["data"], url=json["paging"]["next"], valid=utils.valid)
+		self.mc.set("newest", json, self.timeout)
+		self.render("index.html", posts=json["data"], url=json["paging"]["next"],
+			valid=utils.valid)
 
-class FmlHandler(tornado.web.RequestHandler):
+class FmlHandler(BaseHandler):
 	@tornado.web.asynchronous
 	def get(self, fml_id):
-		http = tornado.httpclient.AsyncHTTPClient()
-		http.fetch("https://graph.facebook.com/" + utils.urlToId(fml_id),
-			callback=self.on_response)
+		fmlId = utils.urlToId(fml_id)
+		json = self.mc.get(fmlId)
+		if not json:
+			http = tornado.httpclient.AsyncHTTPClient()
+			http.fetch("https://graph.facebook.com/" + fmlId,
+				callback=self.on_response)
+		else:
+			self.render("fml.html", post=json, idTo36=utils.idToUrl)
 		
 	def on_response(self, response):
 		if (response.error): raise tornado.web.HTTPError(500)
 		json = tornado.escape.json_decode(response.body)
-		self.render("fml.html", post=json, idTo36=utils.idTo36)
+		self.mc.set(str(json["id"]), json)
+		self.render("fml.html", post=json, idTo36=utils.idToUrl)
 		
-class AboutHandler(tornado.web.RequestHandler):
+class AboutHandler(BaseHandler):
 	def get(self):
 		self.render("about.html")
 
-class TeamHandler(tornado.web.RequestHandler):
+class TeamHandler(BaseHandler):
 	def get(self):
-		self.render("team.html")
-		
-settings = {
-	"static_path": os.path.join(os.path.dirname(__file__), "static"),
-	"template_path": os.path.join(os.path.dirname(__file__), "templates"),
-	"ui_modules": uimodules,
-	"debug": True,
-}
-
-application = tornado.web.Application([
-	(r"/", HomeHandler),
-	(r"/newest", HomeHandler),
-	(r"/about", AboutHandler),
-	(r"/team", TeamHandler),
-	(r"/([a-y0-9]+z[a-y0-9]+)", FmlHandler),
-], **settings)
+		self.render("team.html")	
 
 define("port", default=8888, type=int, help="port to listen on")
 
+class Application(tornado.web.Application):
+	def __init__(self):
+		handlers = [
+			(r"/", HomeHandler),
+			(r"/newest", HomeHandler),
+			(r"/about", AboutHandler),
+			(r"/team", TeamHandler),
+			(r"/([a-y0-9]+z[a-y0-9]+)", FmlHandler),
+		]
+		settings = {
+			"static_path": os.path.join(os.path.dirname(__file__), "static"),
+			"template_path": os.path.join(os.path.dirname(__file__), "templates"),
+			"ui_modules": uimodules,
+			"debug": False,
+		}
+		tornado.web.Application.__init__(self, handlers, **settings)
+		#global memcache instance
+		self.mc = memcache.Client(['127.0.0.1:11211'], debug=0)
+		self.timeout = 20
+
 if __name__ == "__main__":
 	tornado.options.parse_command_line()
-	http_server = tornado.httpserver.HTTPServer(application)
+	http_server = tornado.httpserver.HTTPServer(Application())
 	http_server.listen(options.port)
 	tornado.ioloop.IOLoop.instance().start()
