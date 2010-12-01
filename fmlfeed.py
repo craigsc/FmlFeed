@@ -14,9 +14,6 @@ class BaseHandler(tornado.web.RequestHandler):
 	@property
 	def mc(self):
 		return self.application.mc
-	@property
-	def timeout(self):
-		return self.application.timeout
 
 class HomeHandler(BaseHandler):
 	@tornado.web.asynchronous
@@ -33,7 +30,7 @@ class HomeHandler(BaseHandler):
 	def on_response(self, response):
 		if (response.error): raise tornado.web.HTTPError(500)
 		json = tornado.escape.json_decode(response.body)
-		self.mc.set("newest", json, self.timeout)
+		self.mc.set("newest", json)
 		self.render("index.html", posts=json["data"], url=json["paging"]["next"],
 			valid=utils.valid)
 
@@ -83,7 +80,6 @@ class Application(tornado.web.Application):
 		tornado.web.Application.__init__(self, handlers, **settings)
 		#global memcache instance
 		self.mc = memcache.Client(['127.0.0.1:11211'], debug=0)
-		self.timeout = 20
 
 if __name__ == "__main__":
 	tornado.options.parse_command_line()
