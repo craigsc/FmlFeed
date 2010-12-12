@@ -6,11 +6,11 @@
 	</td>
 	<td>
 		<div class="entry">
-			<a href="{{ idTo36(post["id"]) }}" class="message">{{ escape(post["message"]) }}</a>
+			<a href="{{ idTo36(post["id"]) }}" class="message" target="_blank">{{ escape(post["message"]) }}</a>
 			<div class="status_info"> 
 				<a href="http://www.facebook.com/profile.php?id={{ escape(post["from"]["id"]) }}" target="_blank">
 					{{ escape(post["from"]["name"]) }}
-				</a> <span class="timestamp">{{ post["created_time"] }}</span> <a href="{{ idTo36(post["id"]) }}">{{ like(post) }}</a>
+				</a> <span class="timestamp">{{ post["created_time"] }}</span> <a href="{{ idTo36(post["id"]) }}" target="_blank">{{ like(post) }}</a>
 			</div>	
 		</div>
 	</td>
