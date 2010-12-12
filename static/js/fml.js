@@ -18,9 +18,9 @@ $(document).ready(function() {
 
 function getFML(data) {
 	return "<tr class='status'><td class='profile-pic'><a href='http://www.facebook.com/profile.php?id=" + data.from.id + "' target='_blank'><img src='http://graph.facebook.com/" 
-	+ data.from.id + "/picture?type=square' /></a></td><td><div class='entry'>" + "<a href='" + to35(data.id) + "' class='message'>" 
+	+ data.from.id + "/picture?type=square' /></a></td><td><div class='entry'>" + "<a href='" + to35(data.id) + "' class='message' target='_blank'>" 
 	+ wrap(data.message) + "</a>" + "<div class='status_info'><a href='http://www.facebook.com/profile.php?id=" + data.from.id + "' target='_blank'>" 
-	+ wrap(data.from.name) + "</a> <span class='timestamp'>" + formatTime(data.created_time) + "</span> " + "<a href='" + to35(data.id) + "'>" + like(data) + "</a>"
+	+ wrap(data.from.name) + "</a> <span class='timestamp'>" + formatTime(data.created_time) + "</span> " + "<a href='" + to35(data.id) + "' target='_blank'>" + like(data) + "</a>"
 	+ "</div></div></td></tr><tr><td colspan=2><hr/></td></tr>";
 }
 
