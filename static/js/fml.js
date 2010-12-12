@@ -53,8 +53,8 @@ function to35(post_id) {
 
 function like(post) {
 	if (!post.likes) { return "Like"; }
-	if (post.likes == 1) { return "1 person likes this"; }
-	return post.likes + " people like this";
+	if (post.likes.count == 1) { return "1 person likes this"; }
+	return post.likes.count + " people like this";
 }
 
 function formatTime(time) {

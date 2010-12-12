@@ -31,7 +31,7 @@ def valid(post):
 def like(post):
 	if not "likes" in post:
 		return "Like"
-	if post["likes"] == 1:
+	if post["likes"]["count"] == 1:
 		return "1 person likes this"
-	return `post["likes"]` + " people like this"
+	return `post["likes"]["count"]` + " people like this"
 	
