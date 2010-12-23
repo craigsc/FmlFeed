@@ -10,7 +10,9 @@
 			<div class="status_info"> 
 				<a href="http://www.facebook.com/profile.php?id={{ escape(post["from"]["id"]) }}" target="_blank">
 					{{ escape(post["from"]["name"]) }}
-				</a> <span class="timestamp">{{ post["created_time"] }}</span> <fb:like href="http://fmlfeed.com/{{ idTo36(post["id"]) }}" layout="button_count" font="arial"></fb:like>
+				</a> <span class="timestamp">{{ post["created_time"] }}</span>
+				<a href="http://twitter.com/share" class="twitter-share-button" data-text="This fml is absolutely hilarious!" data-count="horizontal" data-via="craig_campbell" data-related="fmlfeed:The funniest and most popular fmls directly from FmlFeed.com!">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+				<fb:like href="http://fmlfeed.com/{{ idTo36(post["id"]) }}" layout="button_count" font="arial"></fb:like>
 			</div>	
 			<hr style="margin-top: 5px;"/>
 		</div>

@@ -183,6 +183,12 @@ a.button:hover {
 	width: 100%;
 }
 
+/* Twitter Button */
+.twitter-share-button {
+	vertical-align: bottom;
+	margin-left: 15px;
+}
+
 /* footer */
 #footer {
 	font-size: 12px;
