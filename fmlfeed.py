@@ -75,7 +75,7 @@ class Application(tornado.web.Application):
 			"static_path": os.path.join(os.path.dirname(__file__), "static"),
 			"template_path": os.path.join(os.path.dirname(__file__), "templates"),
 			"ui_modules": uimodules,
-			"debug": False,
+			"debug": True,
 		}
 		tornado.web.Application.__init__(self, handlers, **settings)
 		#global memcache instance
