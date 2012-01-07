@@ -39,6 +39,7 @@ class FmlHandler(BaseHandler):
 	def get(self, fml_id):
 		fmlId = utils.urlToId(fml_id)
 		json = self.mc.get(fmlId)
+		print fmlId
 		if not json:
 			http = tornado.httpclient.AsyncHTTPClient()
 			http.fetch("https://graph.facebook.com/" + fmlId,
@@ -48,6 +49,7 @@ class FmlHandler(BaseHandler):
 		
 	def on_response(self, response):
 		if (response.error): raise tornado.web.HTTPError(500)
+		print response
 		json = tornado.escape.json_decode(response.body)
 		self.mc.set(str(json["id"]), json)
 		self.render("fml.html", post=json, idTo36=utils.idToUrl)

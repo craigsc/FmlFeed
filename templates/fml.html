@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 
 {% block meta %}
-<meta name="Description" content="{{ escape(post["message"]) }}"/>
+<meta name="description" content="{{ escape(post["message"]) }}"/>
 <meta property="og:title" content="{{ escape(post["from"]["name"]) }}'s fml"/>
 <meta property="og:type" content="article"/>
 <meta property="og:url" content="http://www.fmlfeed.com/{{ idTo36(post["id"]) }}"/>
@@ -17,6 +17,6 @@
 
 {% block content %}
 <table>
-{{ modules.Fml(post, False) }}
+{% module Fml(post, False) %}
 </table>
 {% end %}
